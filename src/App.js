@@ -8,7 +8,22 @@ import {faEdit} from '@fortawesome/free-solid-svg-icons';
 import CardActions from '@material-ui/core/CardActions';
 import TextField from '@material-ui/core/TextField';
 import FormControl from "@material-ui/core/FormControl";
+import Select from '@material-ui/core/Select';
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
 
+
+
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
 
 const style = {
   papersty: {
@@ -24,12 +39,38 @@ const style = {
 }
 
 
-export default class App extends Component {
-   constructor(props){
-     super(props);
-   }
+export default function App()  {
+  //  constructor(props){
+  //    super(props);
+  //    this.state={
+  //      Title:""
+  //    }
+  //  }
 
-  render(){
+  //  handelTitleChange= (event) =>{
+  //    this.setState({
+  //      Title: event.target.value
+  //    })
+  //  }
+
+  // render(){
+
+  const classes = useStyles();
+
+
+  // const [State, setState] = React.useState({Title:"", age:""});
+  // const Title= State.Title
+
+  // const handleChange = (event) => {
+  //   handelTitleChange(event.target.value);
+  // };
+
+  const [age, setAge] = React.useState('');
+  const [Title, setAge] = React.useState('');
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
 
     return(
       <>
@@ -53,6 +94,8 @@ export default class App extends Component {
                             label="Title"
                             helperText="Enter Book Title"
                             variant="outlined"
+                            // value={Title}
+                            // onChange={handelTitleChange}
                           />
                         </FormControl>
                       </Grid>
@@ -64,6 +107,7 @@ export default class App extends Component {
                             label="Author"
                             helperText="Enter Book Author"
                             variant="outlined"
+                            type="text"
                           />
                         </FormControl>
                       </Grid>
@@ -101,16 +145,21 @@ export default class App extends Component {
                         </FormControl>
                       </Grid>
                       <Grid item xs={8} sm={4}>
-                        <FormControl fullWidth>
-                          <TextField
-                            required
-                            id="username"
-                            label="username"
-                            name="username"
-                            helperText="Plese enter username"
-                            variant="outlined"
-                          />
-                        </FormControl>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                          <InputLabel id="demo-simple-select-outlined-label">Age</InputLabel>
+                          <Select
+                          labelId="demo-simple-select-outlined-label"
+                          id="demo-simple-select-outlined"
+                          value={age}
+                          onChange={handleChange}
+                          label="Age"
+                          defaultValue="Select Lanuage"
+                          >
+                              <MenuItem selected value={"Select Lanuage"}>Select Lanuage</MenuItem>
+                              <MenuItem value={"English"}>English</MenuItem>
+                              <MenuItem value={"Tamil"}>Tamil</MenuItem>
+                          </Select>
+                          </FormControl>
                       </Grid>
                       <Grid item xs={8} sm={4}>
                         <FormControl fullWidth>
@@ -137,4 +186,4 @@ export default class App extends Component {
       </>
     )
   }
-}
+// }
